@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dictionary_CSharp 
 {
+    [Serializable]
     public class Dctnr
     {
         public string Name { get; set; }
@@ -21,6 +22,7 @@ namespace Dictionary_CSharp
         {
             return $"Словарь {this.Name}. Количество слов {this.Data.Count}";
         }
+        
         public void showDctnr()
         {
             foreach (var k in this.Data.Keys)

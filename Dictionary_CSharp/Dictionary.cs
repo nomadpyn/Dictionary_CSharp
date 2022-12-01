@@ -21,6 +21,18 @@ namespace Dictionary_CSharp
         {
             return $"Словарь {this.Name}. Количество слов {this.Data.Count}";
         }
+        public void showDctnr()
+        {
+            foreach (var k in this.Data.Keys)
+            {
+                Console.WriteLine(k);
+                foreach (var s in this.Data[k])
+                {
+                    Console.Write($"{s} ");
+                }
+                Console.WriteLine();
+            }
+        }
         public void addWord()
         {
             Console.WriteLine("Введите слово для перевода");

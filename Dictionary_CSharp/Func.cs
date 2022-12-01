@@ -41,5 +41,23 @@ namespace Dictionary_CSharp
                 Console.WriteLine(ex);
             }            
         }
+        static public Dctnr getFile(string fileName)
+        {
+            Dctnr temp = null;
+            BinaryFormatter binFormat = new BinaryFormatter();
+            try
+            {
+                using (Stream fStream = File.OpenRead(fileName))
+                {
+                    temp = (Dctnr)binFormat.Deserialize(fStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return temp;
+        }
     }
 }

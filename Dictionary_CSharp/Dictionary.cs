@@ -124,5 +124,19 @@ namespace Dictionary_CSharp
                 Console.WriteLine("Такого слова нет в словаре");
             }
         }
+        public void deleteWord()
+        {
+            Console.WriteLine("Введите слово, которое надо удалить из словаря");
+            string word_key = Func.getWord();
+            if (this.Data.ContainsKey(word_key))
+            {
+                this.Data.Remove(word_key);
+                Console.WriteLine("Слово удалено из словаря");
+            }
+            else
+            {
+                Console.WriteLine("Такого слова нет в словаре");
+            }
+        }
     }
 }

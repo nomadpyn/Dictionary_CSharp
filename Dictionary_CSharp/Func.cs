@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,38 @@ namespace Dictionary_CSharp
             }
 
             return temp;
+        }
+        static public string getPath()
+        {
+            DirectoryInfo dir = new DirectoryInfo(".");
+            FileInfo[] files = dir.GetFiles("*.bin");
+            if (files.Length > 0)
+            {
+                Console.WriteLine("В папке есть словари");
+
+                foreach (FileInfo file in files)
+                {
+                    Console.WriteLine(file.Name);
+                }
+                Console.WriteLine($"Выберете словарь из списка по номеру до {files.Length}");
+                int choise = int.Parse(Console.ReadLine());
+                choise--;
+                try
+                {
+                    return files[choise].Name;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Вы неправильно выбрали номер файла.");
+                    return null;
+                }
+                
+            }
+            else
+            {
+                Console.WriteLine("В папке нет словарей");
+                return "null";
+            }
         }
     }
 }

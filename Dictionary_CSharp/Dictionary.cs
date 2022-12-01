@@ -17,7 +17,6 @@ namespace Dictionary_CSharp
             this.Name = name;
             Console.WriteLine($"Создан словарь {this.Name}");
         }
-
         public override string ToString()
         {
             return $"Словарь {this.Name}. Количество слов {this.Data.Count}";
@@ -71,6 +70,32 @@ namespace Dictionary_CSharp
             else
             {
                 Console.WriteLine("Невозможно сделать замену, такого искомого слова не существует");
+            }
+        }
+        public void renameValue()
+        {
+            Console.WriteLine("Введите слово, перевод для которого надо изменить");
+            string word_key = Func.getWord();
+            Console.WriteLine("Введите перевод, который надо поменять");
+            string value = Func.getWord();
+            Console.WriteLine("Введите на что поменять");
+            string new_value = Func.getWord();
+            if (this.Data.ContainsKey(word_key))
+            {
+                if (this.Data[word_key].Contains(value))
+                {
+                    int ind = this.Data[word_key].IndexOf(value);
+                    this.Data[word_key][ind] = new_value;
+                }
+                else
+                {
+                    Console.WriteLine("Такого перевода нет, слово добавлено в перевод");
+                    this.Data[word_key].Add(new_value);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Такого слова нет в словаре");
             }
         }
     }

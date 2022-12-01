@@ -33,6 +33,20 @@ namespace Dictionary_CSharp
                 Console.WriteLine();
             }
         }
+        public void searchWord()
+        {
+            Console.WriteLine("Введите слово для поиска");
+            string word_key = Func.getWord();
+            if (this.Data.ContainsKey(word_key))
+            {
+                Console.WriteLine($"Все варианты перевода {word_key}");
+                foreach (var s in this.Data[word_key])
+                {
+                    Console.Write($"{s} ");
+                }
+                Console.WriteLine();
+            }
+        }
         public void addWord()
         {
             Console.WriteLine("Введите слово для перевода");

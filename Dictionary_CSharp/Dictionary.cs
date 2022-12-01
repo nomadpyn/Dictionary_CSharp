@@ -21,6 +21,30 @@ namespace Dictionary_CSharp
         {
             return $"Словарь {this.Name}. Количество слов {this.Data.Count}";
         }
-        
+        public void addWord()
+        {
+            Console.WriteLine("Введите слово для перевода");
+            string word_key = Func.getWord();
+            Console.WriteLine("Введите перевод слова");
+            string word_value = Func.getWord();
+
+            if (this.Data.ContainsKey(word_key))
+            {
+                if (this.Data[word_key].Contains(word_value))
+                {
+                    Console.WriteLine("Такой перевод для такого слова уже существует");
+                }
+                else
+                {
+                    this.Data[word_key].Add(word_value);
+                }
+            }
+            else
+            {
+                this.Data.Add(word_key, new List<string>());
+                this.Data[word_key].Add(word_value);
+            }
+
+        }
     }
 }

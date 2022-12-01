@@ -138,5 +138,40 @@ namespace Dictionary_CSharp
                 Console.WriteLine("Такого слова нет в словаре");
             }
         }
+        public void deleteTranslate()
+        {
+            Console.WriteLine("Введите слово, для которого надо удалить перевод");
+            string word_key = Func.getWord();
+            if (this.Data.ContainsKey(word_key))
+            {
+                Console.WriteLine($"{word_key}, вариантов перевода: {this.Data[word_key].Count}");
+                foreach (var s in this.Data[word_key])
+                {
+                    Console.Write($"{s} ");
+                }
+                Console.WriteLine();
+                if (this.Data[word_key].Count == 1)
+                {
+                    Console.WriteLine("Вы не можете удалить перевод данного слова, т.к. он последний");
+                }
+                else
+                {
+                    Console.WriteLine("Какое слово из этих удалить?");
+                    string delete = Func.getWord();
+                    if (this.Data[word_key].Contains(delete))
+                    {
+                        this.Data[word_key].Remove(delete);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Вы неправильно указали слово");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Такого слова нет в словаре");
+            }
+        }
     }
 }

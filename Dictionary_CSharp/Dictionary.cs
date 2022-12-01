@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,32 @@ namespace Dictionary_CSharp
                 this.Data[word_key].Add(word_value);
             }
 
+        }
+        public void renameKey()
+        {
+            Console.WriteLine("Введите слово, которое надо изменить");
+            string word_key = Func.getWord();
+            Console.WriteLine("Введите слово на которое надо поменять");
+            string new_word_key = Func.getWord();
+
+            if (this.Data.ContainsKey(word_key))
+            {
+                if (this.Data.ContainsKey(new_word_key))
+                {
+                    Console.WriteLine("Невозможно сделать замену, такой слово уже существует");
+                }
+                else
+                {
+                    this.Data.Add(new_word_key, new List<string>());
+                    this.Data[new_word_key] = this.Data[word_key];
+                    this.Data.Remove(word_key);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Невозможно сделать замену, такого искомого слова не существует");
+            }
         }
     }
 }

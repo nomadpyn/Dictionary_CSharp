@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dictionary_CSharp 
+namespace Dictionary_CSharp
 {
     [Serializable]
     public class Dctnr
@@ -22,7 +23,7 @@ namespace Dictionary_CSharp
         {
             return $"Словарь {this.Name}. Количество слов {this.Data.Count}";
         }
-        
+
         public void showDctnr()
         {
             foreach (var k in this.Data.Keys)
@@ -173,6 +174,38 @@ namespace Dictionary_CSharp
             else
             {
                 Console.WriteLine("Такого слова нет в словаре");
+            }
+        }
+        public void saveTranslate()
+        {
+            Console.WriteLine("Введите слово, перевод которого надо сохранить в текстовый файл");
+            string word_key = Func.getWord();
+            if (this.Data.ContainsKey(word_key))
+            {
+                try
+                {
+                    using (FileStream fs = new FileStream($"{word_key}.txt", FileMode.CreateNew))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs, Encoding.Unicode))
+                        {
+                            foreach (var s in this.Data[word_key])
+                            {
+                                sw.WriteLine(s);
+                            }
+                        }
+                    }
+                    Console.WriteLine("Перевод успешно записан");
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Такого слова в словаре не существует");
             }
         }
     }

@@ -49,6 +49,10 @@ namespace Dictionary_CSharp
                 }
                 Console.WriteLine();
             }
+            else
+            {
+                Console.WriteLine("Искомого слова нет в словаре");
+            }
         }
         public void addWord()
         {

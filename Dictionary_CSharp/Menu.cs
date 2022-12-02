@@ -29,6 +29,7 @@ namespace Dictionary_CSharp
                     case ConsoleKey.D0:
                         {
                             Console.WriteLine("До свидания!");
+                            Environment.Exit(0);
                             break;
                         }
                     default:
@@ -82,7 +83,18 @@ namespace Dictionary_CSharp
             while (choise.Key != ConsoleKey.D1 && choise.Key != ConsoleKey.D0);
 
         }
-        
+ 
+        }
+        static bool ContinueWork()
+        {
+                Console.WriteLine("Продолжить работу?\nY - Да, N(любое другое) - нет");
+                ConsoleKeyInfo choise = Console.ReadKey();
+            Console.Clear();
+                if (choise.Key == ConsoleKey.Y)
+                    return true;
+                else 
+                    return false;
+        }
     }
 }
     

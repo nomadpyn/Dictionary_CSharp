@@ -72,9 +72,16 @@ namespace Dictionary_CSharp
                 {
                     Console.WriteLine(file.Name);
                 }
-                Console.WriteLine($"Выберете словарь из списка по номеру до {files.Length}");
+                Console.WriteLine($"Выберете словарь из списка по номеру до {files.Length} или нажмите 0");
                 int choise = int.Parse(Console.ReadLine());
-                choise--;
+                if (choise == 0)
+                {
+                    return "null";
+                }
+                else
+                {
+                    choise--;
+                }
                 try
                 {
                     return files[choise].Name;
@@ -82,8 +89,9 @@ namespace Dictionary_CSharp
                 catch (Exception ex)
                 {
                     Console.WriteLine("Вы неправильно выбрали номер файла.");
-                    return null;
+                    return "null";
                 }
+
                 
             }
             else

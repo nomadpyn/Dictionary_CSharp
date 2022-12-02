@@ -108,5 +108,17 @@ namespace Dictionary_CSharp
                 return "null";
             }
         }
+        static public bool fileIsExist(string name)
+        {
+            DirectoryInfo dir = new DirectoryInfo(".");
+            FileInfo[] files = dir.GetFiles("*.bin");
+            foreach (FileInfo file in files)
+            {
+                if (file.Name == (name + ".bin"));
+                return true;
+                break;
+            }
+            return false;
+        }
     }
 }

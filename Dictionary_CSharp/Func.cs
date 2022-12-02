@@ -73,7 +73,15 @@ namespace Dictionary_CSharp
                     Console.WriteLine(file.Name);
                 }
                 Console.WriteLine($"Выберете словарь из списка по номеру до {files.Length} или нажмите 0");
-                int choise = int.Parse(Console.ReadLine());
+                int choise = 0; 
+                try 
+                {
+                choise = int.Parse(Console.ReadLine());
+                }
+                catch(FormatException e)
+                {
+                    Console.WriteLine("Неправильный формат ввода");
+                }
                 if (choise == 0)
                 {
                     return "null";

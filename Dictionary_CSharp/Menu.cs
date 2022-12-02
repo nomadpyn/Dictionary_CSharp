@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,16 @@ namespace Dictionary_CSharp
                             if (path == "null")
                             {
                                 Console.WriteLine("Введите имя словаря");
-                                A = new Dctnr(Console.ReadLine());
+                                string name = Console.ReadLine();
+                                if (Func.fileIsExist(name))
+                                {
+                                    Console.WriteLine("Такой словарь уже существует, загружаем его");
+                                    A = Func.getFile(name+".bin");
+                                }
+                                else
+                                {
+                                    A = new Dctnr(name);
+                                }
                             }
                             else
                             {
@@ -110,7 +120,7 @@ namespace Dictionary_CSharp
                         }
                     case ConsoleKey.D3:
                         {
-                            Menu.Level3();
+                            Menu.Level3(ref obj);
                             break;
                         }
                     case ConsoleKey.D0:
@@ -128,6 +138,94 @@ namespace Dictionary_CSharp
             }
             while (choise.Key != ConsoleKey.D0);
         }
+        static void Level3(ref Dctnr obj)
+        {
+            ConsoleKeyInfo choise;
+            Console.WriteLine(obj);
+            do
+            {
+                Console.WriteLine("1 - Добавить слово, 2 - Заменить слово или перевод, 3 - Удалить слово или перевод, 4 - Сохранить перевод в файл, 5 - Назад, 0 - в начало" );
+                choise = Console.ReadKey();
+                Console.Clear();
+                switch (choise.Key)
+                {
+                    case ConsoleKey.D1:
+                        {
+                            obj.addWord();
+                            Func.saveFile(obj);
+                            if (Menu.ContinueWork() == false)
+                                Menu.Level();
+                            break;
+                        }
+                    case ConsoleKey.D2:
+                        {
+                            switch (Menu.oneOrTwo())
+                            {
+                                case 1:
+                                    {
+                                        obj.renameKey();
+                                        if (Menu.ContinueWork() == false)
+                                            Menu.Level();
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        obj.renameValue();
+                                        if (Menu.ContinueWork() == false)
+                                            Menu.Level();
+                                        break;
+                                    }
+                                case 0:
+                                    {
+                                        break;
+                                    }
+                            }
+                            Func.saveFile(obj);
+                            break;
+                        }
+                    case ConsoleKey.D3:
+                        {
+                            switch (Menu.oneOrTwo())
+                            {
+                                case 1:
+                                    {
+                                        obj.deleteWord();
+                                        if (Menu.ContinueWork() == false)
+                                            Menu.Level();
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        obj.deleteTranslate();
+                                        if (Menu.ContinueWork() == false)
+                                            Menu.Level();
+                                        break;
+                                    }
+                                case 0:
+                                    {
+                                        break;
+                                    }
+                            }
+                            Func.saveFile(obj);
+                            break;
+                        }
+                    case ConsoleKey.D4:
+                        {
+                            obj.saveTranslate();
+                            break;
+                        }
+                    case ConsoleKey.D5:
+                        {
+                            break;
+                        }
+                    case ConsoleKey.D0:
+                        {
+                            Menu.Level();
+                            break;
+                        }
+                }
+            }while(choise.Key != ConsoleKey.D5);
+        }
         static bool ContinueWork()
         {
                 Console.WriteLine("Продолжить работу?\nY - Да, N(любое другое) - нет");
@@ -138,6 +236,26 @@ namespace Dictionary_CSharp
                 else 
                     return false;
         }
+        static byte oneOrTwo()
+            {
+                Console.WriteLine("1 - слово, 2 - перевод");
+                byte choise = 0;
+                try
+                {
+                    choise = byte.Parse(Console.ReadLine());
+                    if (choise == 1)
+                        return choise;
+                    if (choise == 2)
+                    return choise;
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("Неправильный формат ввода");
+                }
+                return choise;
+            }
+                
+            
     }
 }
     
